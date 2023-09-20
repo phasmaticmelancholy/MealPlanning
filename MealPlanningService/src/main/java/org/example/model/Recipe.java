@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.model;
 
 import jakarta.persistence.*;
 
@@ -12,7 +12,10 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany(mappedBy = "ingredient_id")
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(name="recipe_ingredient",
+            joinColumns= @JoinColumn(name="ingredient_id"),
+            inverseJoinColumns = @JoinColumn(name="recipe_id"))
     private List<Ingredient> ingredients;
 
     private String url;

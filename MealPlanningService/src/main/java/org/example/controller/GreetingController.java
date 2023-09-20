@@ -1,4 +1,4 @@
-package org.example.controllers;
+package org.example.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @RestController
-public class RecipeController {
+public class GreetingController {
     @GetMapping(value = "/greeting", produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);

@@ -1,18 +1,21 @@
-package org.example.models;
+package org.example.model;
 
 import jakarta.persistence.*;
 
-import java.time.Duration;
 import java.util.List;
 
 public class Ingredient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
 
-    @ManyToMany(mappedBy = "ingredient_id")
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(name="recipe_ingredient",
+            joinColumns= @JoinColumn(name="recipe_id"),
+            inverseJoinColumns = @JoinColumn(name="ingredient_id"))
     private List<Recipe> recipes;
 
     private String status;
