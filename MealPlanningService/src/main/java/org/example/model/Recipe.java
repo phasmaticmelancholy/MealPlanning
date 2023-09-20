@@ -13,15 +13,17 @@ public class Recipe {
     private long id;
 
     @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(name="recipe_ingredient",
-            joinColumns= @JoinColumn(name="ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name="recipe_id"))
+    @JoinTable(name = "recipe_ingredient",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 
+    @Column
     private String url;
 
-    @Column(name="preparation_time")
-    private Duration prepTime;
+    //TODO
+    //@Column(name="preparation_time")
+    //private Duration prepTime;
 
     public List<Ingredient> getIngredients() {
         return ingredients;
@@ -37,13 +39,5 @@ public class Recipe {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public Duration getPrepTime() {
-        return prepTime;
-    }
-
-    public void setPrepTime(Duration prepTime) {
-        this.prepTime = prepTime;
     }
 }

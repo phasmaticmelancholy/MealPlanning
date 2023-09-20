@@ -4,20 +4,17 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column
     private String name;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(name="recipe_ingredient",
-            joinColumns= @JoinColumn(name="recipe_id"),
-            inverseJoinColumns = @JoinColumn(name="ingredient_id"))
-    private List<Recipe> recipes;
-
+    @Column
     private String status;
 
     public String getName() {
@@ -26,14 +23,6 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
     }
 
     public String getStatus() {

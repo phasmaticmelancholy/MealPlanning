@@ -4,6 +4,7 @@ import org.example.model.Recipe;
 import org.example.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,12 +16,12 @@ public class RecipeController {
     private RecipeRepository recipeRepo;
     
     @GetMapping(value = "/recipes")
-    public List<Recipe> greeting() {
+    public List<Recipe> findAllRecipes() {
         return recipeRepo.findAll();
     }
     
-    @GetMapping(value = "/recipes")
-    public List<Recipe> greeting(List<String> ingredientNames) {
+    @GetMapping(value = "/recipes/{ingredientNames}")
+    public List<Recipe> findAllRecipesWithIngredients(@PathVariable List<String> ingredientNames) {
         //TODO
         return recipeRepo.findAll();
     }
