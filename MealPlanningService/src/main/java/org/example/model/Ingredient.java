@@ -3,6 +3,7 @@ package org.example.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Ingredient {
@@ -14,8 +15,13 @@ public class Ingredient {
     @Column
     private String name;
 
-    @Column
-    private String status;
+    public Ingredient()
+    {}
+
+    public Ingredient(String aName)
+    {
+        name = aName;
+    }
 
     public String getName() {
         return name;
@@ -25,11 +31,17 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ingredient that = (Ingredient) o;
+        return name.equals(that.name);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
+
 }

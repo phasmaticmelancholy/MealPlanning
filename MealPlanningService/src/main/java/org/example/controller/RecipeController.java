@@ -1,10 +1,11 @@
 package org.example.controller;
 
+import org.example.model.Ingredient;
 import org.example.model.Recipe;
 import org.example.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,12 +18,14 @@ public class RecipeController {
     
     @GetMapping(value = "/recipes")
     public List<Recipe> findAllRecipes() {
+
         return recipeRepo.findAll();
     }
-    
-    @GetMapping(value = "/recipes/{ingredientNames}")
-    public List<Recipe> findAllRecipesWithIngredients(@PathVariable List<String> ingredientNames) {
-        //TODO
-        return recipeRepo.findAll();
+
+    @GetMapping(value = "/recipes/ingredients")
+    public List<Recipe> findAllRecipesWithIngredients(@RequestParam(name="name") List<String> ingredientNames) {
+        List<Ingredient> ingredients = ingredientNames.stream().map(Ingredient::new).toList();
+        //TODO There is a better way to do this with Specifications I think
+        return recipeRepo.findAll().stream().filter(recipe -> recipe.containsIngredients(ingredientNames)).toList();
     }
 }
