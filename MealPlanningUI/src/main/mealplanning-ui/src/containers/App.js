@@ -16,13 +16,11 @@ class App extends Component
         this.setState({ingredients: selectedIngredients});
     }
 
-
   render ()
   {
         var baseIngredients = ['apples', 'bananas', 'onions'];
         var baseRecipes = ['Recipe1', 'Recipe2']
 
-        console.log(this.state.selectedIngredients);
       return(
         <Container maxWidth="sm">
           <Box sx={{ my: 4 }}>
