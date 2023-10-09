@@ -10,11 +10,12 @@ class RecipeBox extends Component {
   }
 
   render()
-      {
+  {
+      console.log(this.props.recipes);
 
       return(<Typography sx={{ mt: 6, mb: 3 }} color="text.secondary">
         <Stack spacing = {2}>
-            {this.props.recipes.map(recipe => <div>{recipe}</div>)}
+            {this.props.recipes.map(recipe => <div>{recipe.name}</div>)}
         </Stack>
     </Typography>
   );

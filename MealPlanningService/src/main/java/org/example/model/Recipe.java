@@ -20,11 +20,22 @@ public class Recipe {
     private Set<Ingredient> ingredients;
 
     @Column
+    private String name;
+
+    @Column
     private String url;
 
     //TODO
     //@Column(name="preparation_time")
     //private Duration prepTime;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Set<Ingredient> getIngredients() {
         return ingredients;
