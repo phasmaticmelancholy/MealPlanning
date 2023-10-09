@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.Ingredient;
 import org.example.model.Recipe;
+import org.example.repository.IngredientRepository;
 import org.example.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,21 +14,14 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-public class RecipeController {
+public class IngredientController {
     
     @Autowired
-    private RecipeRepository repo;
+    private IngredientRepository repo;
     
-    @GetMapping(value = "/recipes")
-    public List<Recipe> findAllRecipes() {
+    @GetMapping(value = "/ingredients")
+    public List<Ingredient> findAllIngredients() {
 
         return repo.findAll();
-    }
-
-    @GetMapping(value = "/recipes/ingredients")
-    public List<Recipe> findAllRecipesWithIngredients(@RequestParam(name="name") List<String> ingredientNames) {
-        List<Ingredient> ingredients = ingredientNames.stream().map(Ingredient::new).toList();
-        //TODO There is a better way to do this with Specifications I think
-        return repo.findAll().stream().filter(recipe -> recipe.containsIngredients(ingredientNames)).toList();
     }
 }
